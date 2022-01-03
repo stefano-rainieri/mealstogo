@@ -1,57 +1,31 @@
 import React from "react";
-import styled from "styled-components/native";
 import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
-import { Text } from "../../../components/typography/text.component";
 import open from "../../../../assets/open";
 import star from "../../../../assets/star";
-
-const Info = styled(Card.Content)`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${(props) => props.theme.space[3]} ${(props) => props.theme.space[3]}
-    ${(props) => props.theme.space[0]};
-`;
-
-const Star = styled(SvgXml)`
-  margin-top: ${(props) => props.theme.space[1]};
-`;
-
-const Rating = styled.Text`
-  font-family: ${(props) => props.theme.fonts.body};
-`;
-
-const Reviews = styled.View`
-  flex-direction: row;
-`;
-
-const Times = styled.View`
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-const Open = styled(SvgXml)`
-  margin-left: ${(props) => props.theme.space[3]};
-`;
-
-const Icon = styled.Image`
-  height: ${(props) => props.theme.sizes[1]};
-  width: ${(props) => props.theme.sizes[1]};
-  margin-left: ${(props) => props.theme.space[3]};
-`;
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
+import {
+  Icon,
+  Info,
+  Rating,
+  Reviews,
+  Star,
+  Times,
+} from "./restaurant-info-card.styles";
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     address = "100 some random street",
     icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    isClosedTemporarily = false,
+    isClosedTemporarily = true,
     name = "Some Restaurant",
     isOpenNow = true,
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-baking.jpg",
     ],
+    placeId,
     rating = 4.5,
   } = restaurant;
 
@@ -63,8 +37,13 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       <Card.Cover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Reviews>
-          {ratingArray.map((item, index) => (
-            <Star xml={star} width={20} height={20} key={index} />
+          {ratingArray.map((_, index) => (
+            <Star
+              xml={star}
+              width={20}
+              height={20}
+              key={`star-${placeId}-${index}`}
+            />
           ))}
           <Rating>&nbsp;&nbsp;({rating})</Rating>
         </Reviews>
@@ -72,8 +51,14 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           {isClosedTemporarily && (
             <Text variant="error">CLOSED TEMPORARILY</Text>
           )}
-          {isOpenNow && <Open xml={open} width={20} height={20} />}
-          <Icon source={{ uri: icon }} />
+          {isOpenNow && (
+            <Spacer position="left" size="large">
+              <SvgXml xml={open} width={20} height={20} />
+            </Spacer>
+          )}
+          <Spacer position="left" size="large">
+            <Icon source={{ uri: icon }} />
+          </Spacer>
         </Times>
       </Info>
       <Card.Actions />
