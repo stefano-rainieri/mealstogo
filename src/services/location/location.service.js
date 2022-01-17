@@ -21,5 +21,6 @@ export const locationTransform = (result) => {
   return {
     lat,
     lng,
+    viewport: geometry.viewport,
   };
 };
