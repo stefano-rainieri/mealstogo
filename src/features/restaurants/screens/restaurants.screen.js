@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -10,12 +10,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeAreaView } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { FavouritesContext } from "../../../services/favourites/favorites.context";
-
-const List = styled(FlatList).attrs((props) => ({
-  contentContainerStyle: {
-    padding: ~~props.theme.space[3].replace("px", ""),
-  },
-}))``;
+import { RestaurantList } from "../components/restaurant-list.styles";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -48,7 +43,7 @@ export const RestaurantsScreen = ({ navigation }) => {
       {isToggled && (
         <FavouritesBar favourites={favourites} onDetail={goToDetail} />
       )}
-      <List
+      <RestaurantList
         data={restaurants}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
