@@ -11,6 +11,7 @@ import { SafeAreaView } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { FavouritesContext } from "../../../services/favourites/favorites.context";
 import { RestaurantList } from "../components/restaurant-list.styles";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -49,7 +50,9 @@ export const RestaurantsScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <Spacer position="top" size="large">
             <TouchableOpacity onPress={() => goToDetail(item)}>
-              <RestaurantInfoCard restaurant={item} />
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </TouchableOpacity>
           </Spacer>
         )}
