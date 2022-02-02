@@ -1,29 +1,75 @@
 import React, { createContext, useState } from "react";
 
-import { loginRequest } from "./authentication.service";
+import {
+  checkAuthState,
+  loginRequest,
+  logoutRequest,
+  registerRequest,
+} from "./authentication.service";
 
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState(false);
-  const [error, setError] = useState(false);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
-  const onLogin = (email, password) => {
+  checkAuthState((u) => {
+    if (u) {
+      setUser(u);
+    }
+
+    setIsLoading(false);
+  });
+
+  const onLogin = async (email, password) => {
     setIsLoading(true);
-    loginRequest(email, password)
-      .then((loggedUser) => setUser(loggedUser))
-      .catch((loggedError) => setError(loggedError))
-      .finally(() => setIsLoading(false));
+    try {
+      setUser(await loginRequest(email, password));
+    } catch (err) {
+      setError(err.toString());
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onLogout = async () => {
+    setIsLoading(true);
+    setUser(null);
+    try {
+      await logoutRequest();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onRegister = async (email, password, repeatedPassword) => {
+    if (password !== repeatedPassword) {
+      setError("Error: Passwords do not match");
+
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      setUser(await registerRequest(email, password));
+    } catch (err) {
+      setError(err.toString());
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <AuthenticationContext.Provider
       value={{
+        isAuthenticated: !!user,
         user,
         isLoading,
         error,
         onLogin,
+        onLogout,
+        onRegister,
       }}
     >
       {children}

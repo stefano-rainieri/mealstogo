@@ -1,8 +1,6 @@
 import "react-native-gesture-handler";
 import { initializeApp, getApps } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -12,10 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 
 import { theme } from "./src/infrastructure/theme";
-import { LocationContextProvider } from "./src/services/location/location.context";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { Navigation } from "./src/infrastructure/navigation";
-import { FavouritesContextProvider } from "./src/services/favourites/favorites.context";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 if (!getApps().length) {
@@ -30,16 +25,6 @@ if (!getApps().length) {
 }
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    signInWithEmailAndPassword(getAuth(), "ste@rai.me", "password").then(
-      (user) => {
-        setIsAuthenticated(true);
-        console.log(user, isAuthenticated, "mario");
-      }
-    );
-  }, []);
-
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -56,13 +41,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <Navigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />
