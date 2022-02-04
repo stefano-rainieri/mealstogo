@@ -5,10 +5,12 @@ const { placesRequest } = require("./places");
 
 const mapsClient = new Client();
 
-exports.geocode = https.onRequest((request, response) =>
+module.exports.geocode = https.onRequest((request, response) =>
   geocodeRequest(request, response, mapsClient)
 );
 
-exports.places = https.onRequest((request, response) =>
+module.exports.places = https.onRequest((request, response) =>
   placesRequest(request, response, mapsClient)
 );
+
+module.exports.pay = https.onRequest(() => null);
