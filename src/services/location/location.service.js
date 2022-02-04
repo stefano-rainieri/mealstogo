@@ -1,8 +1,10 @@
 import camelize from "camelize";
-import { HOST } from "../../utils/env";
+import { HOST, IS_MOCK } from "../../utils/env";
 
 export const locationRequest = async (searchTerm) => {
-  const response = await fetch(`${HOST}/geocode?city=${searchTerm}`);
+  const response = await fetch(
+    `${HOST}/geocode?city=${searchTerm}&mock=${IS_MOCK}`
+  );
 
   return response.json();
 };

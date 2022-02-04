@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View } from "react-native";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
 
@@ -13,7 +12,16 @@ const Map = styled(MapView)`
   width: 100%;
 `;
 
-export const MapScreen = ({ navigation }) => {
+const ErrorMap = () => (
+  <Map
+    region={{
+      latitude: 0,
+      longitude: 0,
+    }}
+  />
+);
+
+const RestaurantsMap = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
 
@@ -63,4 +71,13 @@ export const MapScreen = ({ navigation }) => {
       </Map>
     </>
   );
+};
+
+export const MapScreen = ({ navigation }) => {
+  const { location } = useContext(LocationContext);
+  if (!location) {
+    return <ErrorMap />;
+  }
+
+  return <RestaurantsMap navigation={navigation} />;
 };
