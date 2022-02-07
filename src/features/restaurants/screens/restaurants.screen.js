@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
@@ -14,6 +14,7 @@ import { FavouritesContext } from "../../../services/favourites/favorites.contex
 import { RestaurantList } from "../components/restaurant-list.styles";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import { Text } from "../../../components/typography/text.component";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -22,7 +23,7 @@ const LoadingContainer = styled.View`
 `;
 
 const Loading = styled(ActivityIndicator)`
-  margin-left: -25px;
+  margin-left: -50px;
 `;
 
 export const RestaurantsScreen = ({ navigation }) => {
@@ -38,7 +39,7 @@ export const RestaurantsScreen = ({ navigation }) => {
     <SafeAreaView>
       {isLoading && (
         <LoadingContainer>
-          <Loading size={50} color={Colors.red400} />
+          <Loading size={96} color={colors.brand.secondary} />
         </LoadingContainer>
       )}
       <Search

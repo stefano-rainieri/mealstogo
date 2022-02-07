@@ -19,11 +19,12 @@ export const AuthenticationContextProvider = ({ children }) => {
       setUser(u);
     }
 
-    setIsLoading(false);
+    console.log("[DEBUG] checkAuthState", isLoading);
   });
 
   const onLogin = async (email, password) => {
     setIsLoading(true);
+    console.log("[DEBUG] onLogin", isLoading);
     try {
       setUser(await loginRequest(email, password));
     } catch (err) {

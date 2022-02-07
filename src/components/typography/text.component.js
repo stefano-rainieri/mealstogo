@@ -10,26 +10,33 @@ const defaultTextStyles = (theme) => `
 `;
 
 const body = (theme) => `
-    font-size: ${theme.fontSizes.body};
+  font-size: ${theme.fontSizes.body};
 `;
 
 const hint = (theme) => `
-    font-size: ${theme.fontSizes.body};
+  font-size: ${theme.fontSizes.caption};
+  font-weight: ${theme.fontWeights.bold};
+  color: ${theme.colors.text.secondary};
 `;
 
 const error = (theme) => `
-    color: ${theme.colors.text.error};
+  color: ${theme.colors.text.error};
 `;
 
 const caption = (theme) => `
-    font-size: ${theme.fontSizes.caption};
-    font-weight: ${theme.fontWeights.bold};
+  font-size: ${theme.fontSizes.caption};
+  font-weight: ${theme.fontWeights.bold};
 `;
 
 const label = (theme) => `
-    font-family: ${theme.fonts.heading};
-    font-size: ${theme.fontSizes.body};
-    font-weight: ${theme.fontWeights.medium};
+  font-family: ${theme.fonts.heading};
+  font-size: ${theme.fontSizes.body};
+  font-weight: ${theme.fontWeights.medium};
+`;
+
+const summary = (theme) => `
+  font-size: ${theme.fontSizes.body};
+  text-align: right;
 `;
 
 const variants = {
@@ -38,6 +45,7 @@ const variants = {
   caption,
   error,
   hint,
+  summary,
 };
 
 export const Text = styled.Text`

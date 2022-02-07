@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -13,6 +13,7 @@ import {
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { Text } from "../../../components/typography/text.component";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -57,7 +58,7 @@ export const LoginScreen = ({ navigation }) => {
               Login
             </AuthButton>
           ) : (
-            <ActivityIndicator animating color={Colors.purple900} />
+            <ActivityIndicator animating color={colors.brand.secondary} />
           )}
         </Spacer>
       </AccountContainer>

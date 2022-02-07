@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -13,6 +13,7 @@ import {
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -68,7 +69,7 @@ export const RegisterScreen = ({ navigation }) => {
               Register
             </AuthButton>
           ) : (
-            <ActivityIndicator animating color={Colors.purple200} />
+            <ActivityIndicator animating color={colors.brand.secondary} />
           )}
         </Spacer>
       </AccountContainer>

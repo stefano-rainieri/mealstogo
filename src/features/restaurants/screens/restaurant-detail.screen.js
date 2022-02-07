@@ -8,7 +8,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { OrderButton } from "../components/restaurant-list.styles";
 import { CartContext } from "../../../services/cart/cart.context";
 
-export const RestaurantDetailScreen = ({ route }) => {
+export const RestaurantDetailScreen = ({ route, navigation }) => {
   const { restaurant } = route.params;
   const { addToCart } = useContext(CartContext);
 
@@ -82,6 +82,7 @@ export const RestaurantDetailScreen = ({ route }) => {
         <OrderButton
           onPress={() => {
             addToCart({ item: "special", price: 1299 }, restaurant);
+            navigation.navigate("CheckoutSummary");
           }}
         >
           Order special! only 12.99€

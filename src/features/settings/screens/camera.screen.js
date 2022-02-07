@@ -24,9 +24,13 @@ export const CameraScreen = ({ navigation }) => {
       return;
     }
 
-    const photo = await cameraRef.current.takePictureAsync();
-    await AsyncStorage.setItem(`${PHOTO_KEY}-${user.uid}`, photo.uri);
-    navigation.goBack();
+    try {
+      const photo = await cameraRef.current.takePictureAsync();
+      await AsyncStorage.setItem(`${PHOTO_KEY}-${user.uid}`, photo.uri);
+    } catch (err) {
+    } finally {
+      navigation.goBack();
+    }
   };
 
   useEffect(() => {

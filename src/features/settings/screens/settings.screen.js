@@ -17,8 +17,10 @@ export const SettingsScreen = ({ navigation }) => {
 
   useFocusEffect(() => {
     (async () => {
-      const uri = await AsyncStorage.get(`${PHOTO_KEY}-${user.uid}`);
-      setPhoto(uri);
+      try {
+        const uri = await AsyncStorage.get(`${PHOTO_KEY}-${user.uid}`);
+        setPhoto(uri);
+      } catch (err) {}
     })();
   });
 
