@@ -25,7 +25,6 @@ export const CheckoutScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onError = (error) => {
-    console.log(error);
     navigation.navigate("CheckoutError", {
       error: error || "Something went wrong with your credit card.",
     });
@@ -97,7 +96,6 @@ export const CheckoutScreen = ({ navigation }) => {
         <NameInput
           label="Name"
           value={name}
-          color="tomato"
           onChangeText={(value) => setName(value || "")}
         />
         <Spacer position="top" size="medium" />

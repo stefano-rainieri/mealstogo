@@ -10,6 +10,7 @@ import { SafeAreaView } from "../../../components/utility/safe-area.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { AvatarContainer, SettingsItem } from "../components/settings.styles";
 import { PHOTO_KEY } from "./camera.screen";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
@@ -30,12 +31,16 @@ export const SettingsScreen = ({ navigation }) => {
         <Spacer position="top" size="large" />
         <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
           {!photo ? (
-            <Avatar.Icon size={180} icon="human" backgroundColor="tomato" />
+            <Avatar.Icon
+              size={180}
+              icon="human"
+              backgroundColor={colors.brand.primary}
+            />
           ) : (
             <Avatar.Image
               size={180}
               source={{ uri: photo }}
-              backgroundColor="tomato"
+              backgroundColor={colors.brand.primary}
             />
           )}
         </TouchableOpacity>
@@ -51,6 +56,20 @@ export const SettingsScreen = ({ navigation }) => {
             <List.Icon {...props} color="black" icon="heart-outline" />
           )}
           onPress={() => navigation.navigate("Favourites")}
+        />
+        <SettingsItem
+          title="Payment"
+          description="Manage payment info"
+          left={(props) => <List.Icon {...props} color="black" icon="cart" />}
+          onPress={() => null}
+        />
+        <SettingsItem
+          title="Past orders"
+          description="Check your last orders"
+          left={(props) => (
+            <List.Icon {...props} color="black" icon="history" />
+          )}
+          onPress={() => null}
         />
         <SettingsItem
           title="Logout"

@@ -6,6 +6,7 @@ import { SafeAreaView } from "../../../components/utility/safe-area.component";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { OrderButton } from "../components/restaurant-list.styles";
+import { Accordion } from "../../../components/accordion/accordion.component";
 import { CartContext } from "../../../services/cart/cart.context";
 
 export const RestaurantDetailScreen = ({ route, navigation }) => {
@@ -22,7 +23,7 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
       <RestaurantInfoCard restaurant={route.params.restaurant} />
       <Spacer position="top" size="large" />
       <ScrollView>
-        <List.Accordion
+        <Accordion
           title="Breakfast"
           left={(props) => <List.Icon {...props} icon="bread-slice" />}
           expanded={breakfastExpanded}
@@ -31,9 +32,9 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
           <List.Item title="Eggs Benedict" />
           <Divider />
           <List.Item title="Classic Breakfast" />
-        </List.Accordion>
+        </Accordion>
         <Divider />
-        <List.Accordion
+        <Accordion
           title="Lunch"
           left={(props) => <List.Icon {...props} icon="hamburger" />}
           expanded={lunchExpanded}
@@ -45,9 +46,9 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
           <Divider />
           <List.Item title="Mushroom Soup" />
           <Divider />
-        </List.Accordion>
+        </Accordion>
         <Divider />
-        <List.Accordion
+        <Accordion
           title="Dinner"
           left={(props) => <List.Icon {...props} icon="food-variant" />}
           expanded={dinnerExpanded}
@@ -58,10 +59,10 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
           <List.Item title="Veal Cutlet with Chicken Mushroom Rotini" />
           <Divider />
           <List.Item title="Steak Frites" />
-        </List.Accordion>
+        </Accordion>
         <Divider />
 
-        <List.Accordion
+        <Accordion
           title="Drinks"
           left={(props) => <List.Icon {...props} icon="cup" />}
           expanded={drinksExpanded}
@@ -76,7 +77,7 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
           <List.Item title="Coke" />
           <Divider />
           <List.Item title="Fanta" />
-        </List.Accordion>
+        </Accordion>
       </ScrollView>
       <Spacer position="top" size="large">
         <OrderButton
